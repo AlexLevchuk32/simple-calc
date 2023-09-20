@@ -7,6 +7,7 @@ window.addEventListener('load', function () {
 	let btnRun = document.querySelector('.btnRun');
 	let resultBox = document.querySelector('.result');
 	let operation = document.querySelector('.operation');
+	let controls = [input1, input2, operation];
 
 	btnRun.addEventListener('click', () => {
 		let num1 = Number(input1.value);
@@ -33,24 +34,21 @@ window.addEventListener('load', function () {
 		}
 
 		resultBox.innerHTML = total;
-		input1.dataset.last = input1.value;
-		input2.dataset.last = input2.value;
-		operation.dataset.last = operation.value;
+		controls.forEach((item) => {
+			item.dataset.last = item.value;
+		});
 		btnRun.disabled = true;
 	});
 
 	input1.addEventListener('input', cleanInput);
 	input2.addEventListener('input', cleanInput);
 
-	[input1, input2, operation].forEach((item) => {
+	controls.forEach((item) => {
 		item.addEventListener('input', enableBtn);
 	});
 
 	function enableBtn() {
-		btnRun.disabled =
-			input1.dataset.last === input1.value &&
-			input2.dataset.last === input2.value &&
-			operation.dataset.last === operation.value;
+		btnRun.disabled = controls.every((item) => item.dataset.last === item.value);
 	}
 
 	function cleanInput() {
