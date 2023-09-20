@@ -1,0 +1,17 @@
+html,
+body {
+	margin: 0;
+}
+
+.calc {
+	padding: 20px;
+}
+
+.btnRun {
+	min-width: 35px;
+}
+
+.result {
+	font-size: 20px;
+	font-weight: 500;
+}
